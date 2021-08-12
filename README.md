@@ -1,5 +1,5 @@
 # Zoom Join Bot
-This is a python bot to join zoom call\n
+This is a python bot to join zoom call
 
 Input must be made manually, later I will add integration with calender and csv
 
