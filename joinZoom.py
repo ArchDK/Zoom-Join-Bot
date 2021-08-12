@@ -24,8 +24,7 @@ class joinClass():
         val = 1
         while btn==None:
             btn = pyautogui.locateCenterOnScreen(img, confidence=val)
-            print(val)
-            val-=0.025
+            val -= 0.025
         pyautogui.moveTo(btn)
         pyautogui.click()
     
@@ -48,6 +47,6 @@ class joinClass():
         self.clickBtn("Asset\leaveMeeting.jpg")
 
     def focusWindow(self,wildcard):
-        self.cW.find_window_wildcard(wildcard)
-        self.cW.BringToTop()
-        self.cW.SetAsForegroundWindow()
+        self.cW.findWindowName(wildcard)
+        self.cW.bringToTop()
+        self.cW.setForegroundWindow()

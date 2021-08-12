@@ -3,20 +3,20 @@ import win32gui, win32com.client
 
 class cWindow:
     def __init__(self):
-        self._hwnd = None
+        self.hwnd = None
         self.shell = win32com.client.Dispatch("WScript.Shell")
 
-    def BringToTop(self):
-        win32gui.BringWindowToTop(self._hwnd)
+    def bringToTop(self):
+        win32gui.BringWindowToTop(self.hwnd)
 
-    def SetAsForegroundWindow(self):
+    def setForegroundWindow(self):
         self.shell.SendKeys('%')
-        win32gui.SetForegroundWindow(self._hwnd)
+        win32gui.SetForegroundWindow(self.hwnd)
 
-    def _window_enum_callback(self, hwnd, wildcard):
-        if re.match(wildcard, str(win32gui.GetWindowText(hwnd))) is not None:
-            self._hwnd = hwnd
+    def windowEnum(self, hwnd, name):
+        if re.match(name, str(win32gui.GetWindowText(hwnd))) != None:
+            self.hwnd = hwnd
 
-    def find_window_wildcard(self, wildcard):
-        self._hwnd = None
-        win32gui.EnumWindows(self._window_enum_callback, wildcard)
+    def findWindowName(self, name):
+        self.hwnd = None
+        win32gui.EnumWindows(self.windowEnum, name)
