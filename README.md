@@ -1,9 +1,9 @@
 # Zoom Join Bot
-This is a python bot to join zoom call
+This is a python bot to join zoom call.
 
-Input must be made manually, later I will add integration with calender and csv
+Input must be made manually, later I will add integration with calender and csv.
 
-It cannot open if the user is fullscreen.
+It cannot open if the user is in fullscreen.
 
-Path is set in appdata roaming, if user installed somewhere else, user must change the path.
+Path is set in appdata roaming. If user installed somewhere else, user must change the path.
 
