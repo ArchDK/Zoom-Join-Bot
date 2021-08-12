@@ -8,7 +8,7 @@ import cWindow
 
 class joinClass():
     def __init__(self):
-        self.zoomPath = getenv('APPDATA') + "\\Zoom\\bin\\Zoom.exe"
+        self.zoomPath = getenv('APPDATA') + "\\Zoom\\bin\\Zoom.exe"#Zoom path
         self.cW = cWindow.cWindow()
 
     def openZoom(self,zoomTime):
