@@ -5,19 +5,28 @@ import time
 from math import ceil
 from datetime import datetime
 import cWindow
+from threading import Thread
 
-class joinClass():
+class joinZoom():
     def __init__(self):
         self.zoomPath = getenv('APPDATA') + "\\Zoom\\bin\\Zoom.exe"#Zoom path
         self.cW = cWindow.cWindow()
 
-    def openZoom(self,zoomTime):
+    def openZoom(self,zoomTime,lists):
         now = datetime.now()
+        now = now.strftime("%H:%M:%S")
+        now = datetime.strptime(now,"%H:%M:%S")
         diff = zoomTime - now
         time.sleep(ceil(diff.total_seconds()))
         subprocess.call(self.zoomPath)
         self.focusWindow(".*Zoom*.")
-        time.sleep(5)
+        time.sleep(3)
+        self.clickBtn("Asset\joinBtn.jpg")
+        time.sleep(3)
+        self.enterMeetingID(lists[1])#ID
+        time.sleep(3)
+        self.enterPassword(lists[2])#Password
+        time.sleep(3)
 
     def clickBtn(self, img):
         btn = None
@@ -25,6 +34,7 @@ class joinClass():
         while btn==None:
             btn = pyautogui.locateCenterOnScreen(img, confidence=val)
             val -= 0.025
+            print(val)
         pyautogui.moveTo(btn)
         pyautogui.click()
     
@@ -40,6 +50,8 @@ class joinClass():
 
     def leaveZoom(self, endZoom):
         now = datetime.now()
+        now = now.strftime("%H:%M:%S")
+        now = datetime.strptime(now,"%H:%M:%S")
         diff = endZoom - now
         time.sleep(ceil(diff.total_seconds()))
         self.focusWindow(".*Zoom Meeting*.")
@@ -48,5 +60,18 @@ class joinClass():
 
     def focusWindow(self,wildcard):
         self.cW.findWindowName(wildcard)
-        self.cW.bringToTop()
+        #self.cW.bringToTop() #Close because program keep crashing
         self.cW.setForegroundWindow()
+
+    def main(self,lists):
+        thread = Thread(target=self.openZoom,args=(datetime.strptime(lists[3]+":00","%H:%M:%S"),lists,))
+        thread.start()
+        print("Is thread1 alive:", thread.is_alive())
+        
+        thread1 = Thread(target=self.leaveZoom,args=(datetime.strptime(lists[4]+":00","%H:%M:%S"),))
+        thread1.start()
+        print("Is thread1 alive:", thread1.is_alive())
+# lis = ["1","2","3","15:48","15:50"]
+
+# a = joinZoom()
+# a.main(lis)

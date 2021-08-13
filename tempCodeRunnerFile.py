@@ -1,6 +1,3 @@
-    # zoom.openZoom(datetime(2021,8,12,10,59,10))
-    # zoom.clickBtn("Asset\joinBtn.jpg")
-    # time.sleep(3)
-    # zoom.enterMeetingID("5047292266")
-    # time.sleep(3)
-    # zoom.enterPassword("123")
+ # thread1 = Thread(target=self.leaveZoom,args=(datetime.strptime(lists[4]+":00","%H:%M:%S"),))
+        # thread1.start()
+        # print("Is t
