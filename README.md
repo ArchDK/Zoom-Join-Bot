@@ -7,3 +7,5 @@ It cannot open if the user is in fullscreen.
 
 Path is set in appdata roaming. If user installed somewhere else, user must change the path.
 
+User can input more than one schedule using the GUI.
+
