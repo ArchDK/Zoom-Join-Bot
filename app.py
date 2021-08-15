@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import Listbox, Scrollbar, Tk, ttk
 from tkinter.constants import CENTER
 import joinZoom
-from threading import Thread, Event 
+
 class zoomInfo(ttk.Frame):
     def __init__(self,container):
         super().__init__(container)
@@ -116,11 +116,10 @@ class listZoom(ttk.Frame):
         self.scrollbar.grid(column=5,row=2,padx=5)
         self.listBox = Listbox(self,yscrollcommand=self.scrollbar.set,width=70)
         self.listBox.grid(column=0,row=3,columnspan=6,padx=5)
-#           
+
     def widgetList(self):
         text = ""
         text = [str(x) for x in self.list[self.value]]
-        print(self.list)
         output = f"   {self.stringFormat(text[0][:10],11)}   |   {self.stringFormat(text[1][:10],12)}   |   {self.stringFormat(text[2][:12],12)}   |    {self.stringFormat(text[3][:5],10)}   |    {self.stringFormat(text[4][:5],7)}   "
         self.listBox.insert("end",output)
         self.value+=1
@@ -133,10 +132,7 @@ class listZoom(ttk.Frame):
        zoomData = []
        zoomData += self.zoomInfos.getZoomInfo()
        zoomData += self.zoomTimes.getZoomTime()
-       print(zoomData[3][:5])
        self.list.append(zoomData)
-    #    thread = Thread(target=self.zoom.main(self.list[self.value]))
-    #    thread.start()
        self.after(100,self.zoom.main(self.list[self.value]))
        self.widgetList()
 
@@ -160,9 +156,3 @@ class app(tk.Tk):
         listZoomFrame = listZoom(self,zoomInfoFrame,zoomTimeFrame,self.zooms)
         listZoomFrame.grid(column=0,row=2)
 
-
-
-
-if __name__ == "__main__":
-    apps = app()
-    apps.mainloop()   
