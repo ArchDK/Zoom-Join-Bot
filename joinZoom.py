@@ -23,7 +23,7 @@ class joinZoom():
         time.sleep(3)
         self.clickBtn("Asset\joinBtn.jpg")
         time.sleep(3)
-        self.enterMeetingID(lists[1])#ID
+        self.enterMeetingID(lists[1].replace(" ",""))#ID
         time.sleep(3)
         self.enterPassword(lists[2])#Password
         time.sleep(3)
@@ -64,14 +64,11 @@ class joinZoom():
         self.cW.setForegroundWindow()
 
     def main(self,lists):
+        print(lists)
         thread = Thread(target=self.openZoom,args=(datetime.strptime(lists[3]+":00","%H:%M:%S"),lists,))
         thread.start()
         print("Is thread1 alive:", thread.is_alive())
-        
-        thread1 = Thread(target=self.leaveZoom,args=(datetime.strptime(lists[4]+":00","%H:%M:%S"),))
-        thread1.start()
-        print("Is thread1 alive:", thread1.is_alive())
-# lis = ["1","2","3","15:48","15:50"]
-
-# a = joinZoom()
-# a.main(lis)
+        if(lists[4]!= ""):
+            thread1 = Thread(target=self.leaveZoom,args=(datetime.strptime(lists[4]+":00","%H:%M:%S"),))
+            thread1.start()
+            print("Is thread1 alive:", thread1.is_alive())

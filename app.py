@@ -59,7 +59,8 @@ class zoomTime(ttk.Frame):
         startLabel.grid(column=0, row=0, padx=5, pady=5)
 
         self.start = tk.StringVar()
-        startEntry = ttk.Entry(self, text="HH-MM", textvariable=self.start)
+        self.start.set("HH:MM")
+        startEntry = ttk.Entry(self, textvariable=self.start)
         startEntry.grid(column=1, row=0, padx=5, pady=5)
 
         endLabel = ttk.Label(self, text="End")
