@@ -24,7 +24,7 @@ class joinZoom():
         self.clickBtn("Asset\joinBtn.jpg")
         time.sleep(3)
         self.enterMeetingID(lists[1].replace(" ",""))#ID
-        time.sleep(3)
+        time.sleep(6)
         self.enterPassword(lists[2])#Password
         time.sleep(3)
 
