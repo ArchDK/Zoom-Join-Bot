@@ -18,17 +18,21 @@ class joinZoom():
         now = datetime.strptime(now,"%H:%M:%S")
         diff = zoomTime - now
         time.sleep(ceil(diff.total_seconds()))
-        subprocess.call(self.zoomPath)
-        self.focusWindow(".*Zoom*.")
-        time.sleep(3)
+        zoom = subprocess.Popen([self.zoomPath],shell=True)
+        pool = zoom.poll()
+        print(pool)
+        time.sleep(5)
+        #self.focusWindow("Zoom")
         self.clickBtn("Asset\joinBtn.jpg")
-        time.sleep(3)
+        time.sleep(5)
         self.enterMeetingID(lists[1].replace(" ",""))#ID
-        time.sleep(6)
-        self.enterPassword(lists[2])#Password
-        time.sleep(3)
+        if(lists[2]!=""):
+            time.sleep(10)
+            self.enterPassword(lists[2])#Password
+        
 
     def clickBtn(self, img):
+        print(img)
         btn = None
         val = 1
         while btn==None:
@@ -64,11 +68,11 @@ class joinZoom():
         self.cW.setForegroundWindow()
 
     def main(self,lists):
-        print(lists)
+
         thread = Thread(target=self.openZoom,args=(datetime.strptime(lists[3]+":00","%H:%M:%S"),lists,))
         thread.start()
         print("Is thread1 alive:", thread.is_alive())
         if(lists[4]!= ""):
             thread1 = Thread(target=self.leaveZoom,args=(datetime.strptime(lists[4]+":00","%H:%M:%S"),))
             thread1.start()
-            print("Is thread1 alive:", thread1.is_alive())
+            print("Is thread2 alive:", thread1.is_alive())

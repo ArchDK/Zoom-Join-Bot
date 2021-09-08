@@ -30,7 +30,7 @@ class zoomInfo(ttk.Frame):
         idEntry = ttk.Entry(self, textvariable=self.id)
         idEntry.grid(column=1, row=2, padx=5)
 
-        passwordLabel = ttk.Label(self, text="Password*")
+        passwordLabel = ttk.Label(self, text="Password")
         passwordLabel.grid(column=2, row=1, padx=5, pady=5)
 
         self.password = tk.StringVar()
@@ -121,10 +121,9 @@ class listZoom(ttk.Frame):
     def widgetList(self):
         text = ""
         text = [str(x) for x in self.list[self.value]]
-        output = f"   {self.stringFormat(text[0][:10],11)}   |   {self.stringFormat(text[1][:10],12)}   |   {self.stringFormat(text[2][:12],12)}   |    {self.stringFormat(text[3][:5],10)}   |    {self.stringFormat(text[4][:5],7)}   "
+        output = (f"   {self.stringFormat(text[0][:10],11)}   |   {self.stringFormat(text[1],15)}   |   {self.stringFormat(text[2][:12],12)}   |    {self.stringFormat(text[3][:5],10)}   |    {self.stringFormat(text[4][:5],7)}   ")
         self.listBox.insert("end",output)
         self.value+=1
-
     def stringFormat(self,string,spaceValue):
         x = str( " "* (spaceValue-(len(string))) + string + " "* (spaceValue-(len(string))) )
         return x
@@ -145,8 +144,9 @@ class app(tk.Tk):
         self.minsize(400,300)
         self.rowconfigure([0,1,2], weight=0,minsize=80)
         self.resizable(0,0)
-
+        self.iconbitmap("Asset\ZoomLogo.ico")
         self.insertFrame()
+
     def insertFrame(self):
         zoomInfoFrame = zoomInfo(self)
         zoomInfoFrame.grid(column=0,row=0)
